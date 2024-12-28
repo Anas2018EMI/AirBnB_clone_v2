@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Defines the BaseModel class, which serves as the base for all models.
 """
