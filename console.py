@@ -137,12 +137,12 @@ class HBNBCommand(cmd.Cmd):
                             elif ("." in value):
                                 try:
                                     value = float(value)
-                                except:
+                                except Exception:
                                     flag = 1
                             else:
                                 try:
                                     value = int(value)
-                                except:
+                                except Exception:
                                     flag = 1
                             if (not flag):
                                 setattr(new_instance, pair_split[0], value)
@@ -150,9 +150,9 @@ class HBNBCommand(cmd.Cmd):
                             continue
                     new_instance.save()
                     print(new_instance.id)
-                except:
+                except Exception:
                     new_instance.rollback()
-            except:
+            except Exception:
                 print("** class doesn't exist **")
                 storage.rollback()
         else:
