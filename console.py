@@ -119,15 +119,44 @@ class HBNBCommand(cmd.Cmd):
         Usage: create <class name>
         """
         args = shlex.split(arg)
-        if not args:
+
+        if arg:
+            args = arg.split()
+            try:
+                new_instance = eval(args[0])()
+                try:
+                    for pair in args[1:]:
+                        pair_split = pair.split("=")
+                        if (hasattr(new_instance, pair_split[0])):
+                            value = pair_split[1]
+                            flag = 0
+                            if (value.startswith('"')):
+                                value = value.strip('"')
+                                value = value.replace("\\", "")
+                                value = value.replace("_", " ")
+                            elif ("." in value):
+                                try:
+                                    value = float(value)
+                                except:
+                                    flag = 1
+                            else:
+                                try:
+                                    value = int(value)
+                                except:
+                                    flag = 1
+                            if (not flag):
+                                setattr(new_instance, pair_split[0], value)
+                        else:
+                            continue
+                    new_instance.save()
+                    print(new_instance.id)
+                except:
+                    new_instance.rollback()
+            except:
+                print("** class doesn't exist **")
+                storage.rollback()
+        else:
             print("** class name missing **")
-            return
-        try:
-            new_instance = eval(args[0])()
-            new_instance.save()
-            print(new_instance.id)
-        except NameError:
-            print("** class doesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
