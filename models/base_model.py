@@ -46,7 +46,6 @@ class BaseModel:
         """Updates updated_at with current time when instance is changed"""
         from models import storage  # Import storage to save the instance
         self.updated_at = datetime.utcnow()  # Update the timestamp
-        storage.new(self)  # Mark the instance as new in storage
         storage.save()  # Persist changes to storage
 
     def to_dict(self):
