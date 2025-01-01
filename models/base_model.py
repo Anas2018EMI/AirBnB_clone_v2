@@ -2,7 +2,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
 from datetime import datetime
 import uuid
-from models import storage
 
 Base = declarative_base()  # SQLAlchemy declarative base for ORM
 
@@ -34,6 +33,7 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at and saves the instance to storage"""
+        from models import storage  # Lazy import to avoid circular dependency
         self.updated_at = datetime.utcnow()
         storage.new(self)
         storage.save()
@@ -50,4 +50,5 @@ class BaseModel:
 
     def delete(self):
         """Deletes the current instance from storage"""
+        from models import storage  # Lazy import to avoid circular dependency
         storage.delete(self)
