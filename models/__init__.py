@@ -1,16 +1,14 @@
-#!/usr/bin/python3
-"""
-This module initializes the storage system for the HBNB project.
-"""
-from os import getenv
+import os
+from models.engine.db_storage import DBStorage
+from models.engine.file_storage import FileStorage
 
-storage_type = getenv('HBNB_TYPE_STORAGE')  # Determine the storage type from environment variables
+# Determine the storage type from environment variable
+storage_type = os.getenv('HBNB_TYPE_STORAGE', 'file')
 
 if storage_type == 'db':
-    from models.engine.db_storage import DBStorage
-    storage = DBStorage()  # Initialize DBStorage if storage type is 'db'
+    storage = DBStorage()
 else:
-    from models.engine.file_storage import FileStorage
-    storage = FileStorage()  # Default to FileStorage
+    storage = FileStorage()
 
-storage.reload()  # Reload objects from storage
+# Reload storage to initialize data
+storage.reload()
