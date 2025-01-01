@@ -31,6 +31,11 @@ class BaseModel:
             if 'updated_at' not in kwargs:
                 self.updated_at = datetime.utcnow()
 
+    def __str__(self):
+        """Returns a string representation of the instance"""
+        cls = self.__class__.__name__
+        return f"[{cls}] ({self.id}) {self.__dict__}"
+
     def save(self):
         """Updates updated_at and saves the instance to storage"""
         from models import storage  # Lazy import to avoid circular dependency
