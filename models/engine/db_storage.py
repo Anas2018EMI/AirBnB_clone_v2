@@ -32,6 +32,9 @@ class DBStorage:
         # Drop all tables if environment is test
         if HBNB_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
+    def rollback(self):
+        """Rolls back the current database session"""
+        self.__session.rollback()
 
     def all(self, cls=None):
         """Query all objects or objects of a specific class."""
