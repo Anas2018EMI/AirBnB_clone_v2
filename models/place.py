@@ -42,5 +42,6 @@ class Place(BaseModel, Base):
         def reviews(self):
             from models import storage
             # Getting the list of Review instances with
-            # place_id equals to the current Place.id for FileStorage
+            # place_id equals to the current Place.id
+            # for FileStorage
             return [review for review in storage.all(Review).values() if review.place_id == self.id]
