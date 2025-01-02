@@ -1,5 +1,8 @@
 from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from models.place import Place
+
 
 class City(BaseModel, Base):
     """
@@ -9,3 +12,6 @@ class City(BaseModel, Base):
 
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
     name = Column(String(128), nullable=False)
+
+    places = relationship('Place', back_populates='cities',
+                          cascade='all, delete-orphan')
