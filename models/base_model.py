@@ -5,7 +5,9 @@ import uuid
 
 Base = declarative_base()  # SQLAlchemy declarative base for ORM
 
+
 class BaseModel:
+
     """A base class for all hbnb models"""
 
     # Define SQLAlchemy columns
@@ -50,7 +52,8 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         if '_sa_instance_state' in dictionary:
-            del dictionary['_sa_instance_state']  # Remove SQLAlchemy state if present
+            # Remove SQLAlchemy state if present
+            del dictionary['_sa_instance_state']
         return dictionary
 
     def delete(self):

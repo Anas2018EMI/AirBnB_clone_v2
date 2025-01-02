@@ -124,18 +124,11 @@ class HBNBCommand(cmd.Cmd):
             args = arg.split()
 
             try:
-                # print(args[0])
                 new_instance = eval(args[0])()
-                # new_instance = City()
-                # print("new_instance")
                 try:
-                    # i = 0
                     for pair in args[1:]:
-
-                        # print("for loop")
                         pair_split = pair.split("=")
                         if (hasattr(new_instance, pair_split[0])):
-                            # print("attribute")
                             value = pair_split[1]
                             flag = 0
                             if (value.startswith('"')):
@@ -153,12 +146,9 @@ class HBNBCommand(cmd.Cmd):
                                 except Exception:
                                     flag = 1
                             if (not flag):
-                                # print("setattr")
                                 setattr(new_instance, pair_split[0], value)
                         else:
                             continue
-                        # print(i)
-                        # i = + 1
                     new_instance.save()
                     print("saved")
                     print(new_instance.id)

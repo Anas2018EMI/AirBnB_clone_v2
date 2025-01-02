@@ -25,7 +25,8 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """Getter attribute for FileStorage relationship.
-        Returns the list of City instances with state_id matching the current State id.
+        Returns the list of City instances with state_id
+        matching the current State id.
         """
         from models import storage
         from models.city import City
