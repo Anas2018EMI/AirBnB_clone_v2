@@ -8,7 +8,7 @@ from models.city import City
 from models.amenity import Amenity
 from models import storage
 
-# creation of a State
+# creation of a State from state.py
 state = State(name="California")
 state.save()
 
