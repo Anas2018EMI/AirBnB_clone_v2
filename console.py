@@ -122,7 +122,6 @@ class HBNBCommand(cmd.Cmd):
 
         if arg:
             args = arg.split()
-
             try:
                 new_instance = eval(args[0])()
                 try:
@@ -150,7 +149,6 @@ class HBNBCommand(cmd.Cmd):
                         else:
                             continue
                     new_instance.save()
-                    print("saved")
                     print(new_instance.id)
                 except Exception:
                     new_instance.rollback()
