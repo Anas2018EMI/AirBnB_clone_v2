@@ -2,16 +2,25 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from os import getenv
+
+
+storage_type = getenv("HBNB_TYPE_STORAGE")
+
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
 
-    # Define SQLAlchemy columns
-    name = Column(String(128), nullable=False)
+    if storage_type == "db":
+        # Define SQLAlchemy columns
+        name = Column(String(128), nullable=False)
 
-    # Define relationship with City
-    cities = relationship('City', backref='state', cascade='all, delete, delete-orphan')
+        # Define relationship with City
+        cities = relationship('City', backref='state',
+                              cascade='all, delete, delete-orphan')
+    else:
+        name = ""
 
     @property
     def cities(self):

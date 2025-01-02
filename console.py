@@ -122,12 +122,20 @@ class HBNBCommand(cmd.Cmd):
 
         if arg:
             args = arg.split()
+
             try:
+                # print(args[0])
                 new_instance = eval(args[0])()
+                # new_instance = City()
+                # print("new_instance")
                 try:
+                    # i = 0
                     for pair in args[1:]:
+
+                        # print("for loop")
                         pair_split = pair.split("=")
                         if (hasattr(new_instance, pair_split[0])):
+                            # print("attribute")
                             value = pair_split[1]
                             flag = 0
                             if (value.startswith('"')):
@@ -145,15 +153,19 @@ class HBNBCommand(cmd.Cmd):
                                 except Exception:
                                     flag = 1
                             if (not flag):
+                                # print("setattr")
                                 setattr(new_instance, pair_split[0], value)
                         else:
                             continue
+                        # print(i)
+                        # i = + 1
                     new_instance.save()
+                    print("saved")
                     print(new_instance.id)
                 except Exception:
                     new_instance.rollback()
             except Exception:
-                print("** class doesn't exist **")
+                print("** class doesn't exist 1 **")
                 storage.rollback()
         else:
             print("** class name missing **")
@@ -178,7 +190,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if c_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+            print("** class doesn't exist 2 **")
             return
 
         if not c_id:
@@ -209,7 +221,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if c_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+            print("** class doesn't exist 3 **")
             return
 
         if not c_id:
@@ -236,7 +248,7 @@ class HBNBCommand(cmd.Cmd):
         if args:
             args = args.split(' ')[0]  # Remove trailing arguments
             if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
+                print("** class doesn't exist 4 **")
                 return
             for k, v in storage.all(HBNBCommand.classes[args]).items():
                 print_list.append(str(v))
@@ -275,7 +287,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if c_name not in HBNBCommand.classes:  # class name invalid
-            print("** class doesn't exist **")
+            print("** class doesn't exist 5 **")
             return
 
         # isolate id from args
