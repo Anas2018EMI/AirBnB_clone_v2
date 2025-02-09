@@ -14,6 +14,7 @@ from flask import Flask
 # Create a Flask web application instance
 app = Flask(__name__)
 
+
 # Define the route '/' with strict_slashes set to False
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
@@ -25,6 +26,7 @@ def hello_hbnb():
     """
     return "Hello HBNB!"
 
+
 # Define the route '/hbnb' with strict_slashes set to False
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
@@ -35,6 +37,7 @@ def hbnb():
         str: The message 'HBNB'
     """
     return "HBNB"
+
 
 if __name__ == "__main__":
     # Start the Flask development server
